@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: Quartz 5
+  pageTitle: The Curse of Strahd
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
@@ -13,33 +13,38 @@ configuration:
     - templates
     - .obsidian
   theme:
-    fontOrigin: googleFonts
+    # Font loading is owned by the `fonts` plugin below (self-hosted). `local` here stops
+    # Quartz core from emitting its own (buggy, unencoded) Google Fonts <link>.
+    fontOrigin: local
     cdnCaching: true
     typography:
-      header: Schibsted Grotesk
-      body: Source Sans Pro
+      title: Grenze Gotisch   # blackletter — site masthead only (--titleFont)
+      header: Cinzel
+      body: EB Garamond
       code: IBM Plex Mono
     colors:
+      # Light mode = "the Tome of Strahd": aged parchment, sepia ink, oxblood links
       lightMode:
-        light: "#faf8f8"
-        lightgray: "#e5e5e5"
-        gray: "#b8b8b8"
-        darkgray: "#4e4e4e"
-        dark: "#2b2b2b"
-        secondary: "#284b63"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#fff23688"
+        light: "#e9e0cc"        # aged parchment background
+        lightgray: "#d3c6a8"    # borders, hr, table lines
+        gray: "#9a8a6e"         # muted text, graph nodes
+        darkgray: "#3b3227"     # body ink (dark sepia)
+        dark: "#241c13"         # headers / strong text (near-black brown)
+        secondary: "#7c1420"    # links + primary accent (oxblood)
+        tertiary: "#8a5a1e"     # hover / secondary accent (dark gold-brown)
+        highlight: rgba(124, 20, 32, 0.12)   # internal-link bg, search hover
+        textHighlight: "#7c142040"           # ==mark== (oxblood wash)
+      # Dark mode = "the Mists of Barovia": near-black, blood crimson, candle-gold
       darkMode:
-        light: "#161618"
-        lightgray: "#393639"
-        gray: "#646464"
-        darkgray: "#d4d4d4"
-        dark: "#ebebec"
-        secondary: "#7b97aa"
-        tertiary: "#84a59d"
-        highlight: rgba(143, 159, 169, 0.15)
-        textHighlight: "#b3aa0288"
+        light: "#0e0d10"        # near-black background, faint cold purple
+        lightgray: "#2a2530"    # borders, hr, table lines
+        gray: "#6f6570"         # muted text, graph nodes
+        darkgray: "#c7bcc0"     # body text (bone/ash — readable on near-black)
+        dark: "#ece3df"         # headers / strong text (pale bone)
+        secondary: "#c02b39"    # links + primary accent (blood crimson, tuned for contrast)
+        tertiary: "#b3893f"     # hover / secondary accent (tarnished candle-gold)
+        highlight: rgba(192, 43, 57, 0.15)   # internal-link bg, search hover
+        textHighlight: "#c02b3959"           # ==mark== (blood smear, ~35% alpha)
 plugins:
   - source: github:quartz-community/created-modified-date
     enabled: true
@@ -91,11 +96,6 @@ plugins:
   - source: github:quartz-community/description
     enabled: true
     order: 70
-  - source: github:quartz-community/latex
-    enabled: true
-    options:
-      renderEngine: katex
-    order: 80
   - source: github:quartz-community/citations
     enabled: false
     order: 85
@@ -110,6 +110,12 @@ plugins:
     order: 92
   - source: github:quartz-community/fonts
     enabled: true
+    options:
+      fontOrigin: selfHosted   # download at build → /static/fonts; no runtime dependency on Google
+      title: "Grenze Gotisch"
+      header: Cinzel
+      body: "EB Garamond"
+      code: "IBM Plex Mono"
   - source: github:quartz-community/remove-draft
     enabled: true
   - source: github:quartz-community/explicit-publish
@@ -141,10 +147,6 @@ plugins:
   - source: github:quartz-community/favicon
     enabled: true
   - source: github:quartz-community/og-image
-    enabled: true
-  - source: github:quartz-community/cname
-    enabled: true
-  - source: github:quartz-community/canvas-page
     enabled: true
   - source: github:quartz-community/content-page
     enabled: true
@@ -221,12 +223,6 @@ plugins:
     layout:
       position: afterBody
       priority: 10
-  - source: github:quartz-community/footer
-    enabled: true
-    options:
-      links:
-        GitHub: https://github.com/jackyzha0/quartz
-        Discord Community: https://discord.gg/cRFFHYye7t
   - source: github:quartz-community/recent-notes
     enabled: false
   - source: github:quartz-community/spacer
@@ -237,10 +233,6 @@ plugins:
       position: left
       priority: 25
       display: mobile-only
-  - source: github:quartz-community/bases-page
-    enabled: true
-    options: {}
-    order: 50
   - source: github:quartz-community/note-properties
     enabled: true
     options:
@@ -250,7 +242,7 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true
       delimiters: ---
       language: yaml
     order: 5
@@ -258,20 +250,6 @@ plugins:
       position: beforeBody
       priority: 15
       display: all
-  - source:
-      name: quartz-themes
-      repo: github:saberzero1/quartz-themes
-      subdir: plugin
-    enabled: true
-    options:
-      theme: default
-  - source: github:quartz-community/obsidian-plugin-excalidraw
-    enabled: true
-    options:
-      enableInteraction: true
-      darkMode: auto
-      exportPadding: 20
-    order: 50
 layout:
   groups:
     toolbar:
@@ -295,5 +273,3 @@ layout:
         - reader-mode
       positions:
         right: []
-    canvas: {}
-    bases: {}

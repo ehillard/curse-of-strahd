@@ -1,6 +1,12 @@
 ---
-title: Welcome to Quartz
+id: index
+aliases: []
+tags:
+  - created:2026-07-28T23:29:49
+title: The Curse of Strahd
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+> [!quote] Strahd
+> I hope you are ready for your descent into fear
+
+Welcome, traveler, to a campaign vault bound in mist and dread.
