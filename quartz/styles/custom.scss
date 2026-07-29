@@ -1,3 +1,185 @@
 @use "./variables.scss" as *;
 
-// put your custom CSS here!
+// =============================================================================
+// Curse of Strahd — a grimoire of Barovia
+// Palette + fonts live in quartz.config.yaml. This layers atmosphere on top,
+// referencing the theme CSS vars so it tracks the palette:
+//   --light --lightgray --gray --darkgray --dark --secondary --tertiary
+//   --highlight --textHighlight --titleFont --headerFont --bodyFont
+//
+// DESIGN: boldness is spent in exactly ONE place — "The Mists" (a cold fog
+// banked at the base of every page, the setting's literal trap). Everything
+// else is deliberately quiet. DOM hooks (Quartz 5): `.page-title` masthead,
+// `.article-title` note title, `article > .markdown-preview-view.markdown-rendered`
+// body content, `.callout[data-callout]`.
+// =============================================================================
+
+// --- SIGNATURE: The Mists of Barovia ----------------------------------------
+// Cold vapour banked along the bottom of the viewport, drifting slowly. Fixed
+// and non-interactive. The fog layer is wider than the viewport so it can drift
+// horizontally without exposing an edge. Motion only when the viewer allows it.
+body::after {
+  content: "";
+  position: fixed;
+  left: -25%;
+  right: -25%;
+  bottom: 0;
+  height: 22vh;
+  width: 150%;
+  pointer-events: none;
+  z-index: 9998;
+  // layered banks of cold grey-violet vapour, densest at the very base (kept faint)
+  background:
+    radial-gradient(120% 80% at 30% 120%, rgba(74, 69, 82, 0.15), transparent 60%),
+    radial-gradient(120% 90% at 72% 130%, rgba(58, 58, 74, 0.12), transparent 62%),
+    linear-gradient(to top, rgba(70, 66, 78, 0.16) 0%, rgba(70, 66, 78, 0.05) 45%, transparent 100%);
+  filter: blur(6px);
+}
+// warm parchment shouldn't read as cosy — keep the base haze pale and cold
+:root[saved-theme="light"] body::after {
+  background:
+    radial-gradient(120% 80% at 30% 120%, rgba(120, 120, 132, 0.11), transparent 60%),
+    radial-gradient(120% 90% at 72% 130%, rgba(108, 110, 120, 0.09), transparent 62%),
+    linear-gradient(to top, rgba(116, 116, 128, 0.12) 0%, rgba(116, 116, 128, 0.04) 45%, transparent 100%);
+}
+// a whisper of edge-darkening so content sits inside the gloom (not the focus)
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  background: radial-gradient(130% 120% at 50% 38%, transparent 62%, rgba(0, 0, 0, 0.45) 100%);
+}
+:root[saved-theme="light"] body::before {
+  background: radial-gradient(130% 120% at 50% 40%, transparent 66%, rgba(59, 40, 20, 0.20) 100%);
+}
+// The drift — the mists are never quite still. Only if motion is welcome.
+@media (prefers-reduced-motion: no-preference) {
+  body::after {
+    animation: barovia-mist 64s ease-in-out infinite alternate;
+  }
+}
+@keyframes barovia-mist {
+  from {
+    transform: translateX(-4%);
+  }
+  to {
+    transform: translateX(4%);
+  }
+}
+
+// --- MASTHEAD: blackletter site title (Grenze Gotisch) ----------------------
+// Blackletter appears here and NOWHERE else.
+.page-title {
+  font-family: var(--titleFont), "Grenze Gotisch", serif;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+}
+
+// --- Body readability -------------------------------------------------------
+// EB Garamond runs small; open it up for long read-aloud passages.
+.markdown-rendered {
+  font-size: 1.08rem;
+  line-height: 1.7;
+
+  p,
+  li,
+  td,
+  th {
+    line-height: 1.7;
+  }
+}
+
+// --- Engraved title + content headings (Cinzel) -----------------------------
+// The note title lives outside <article>, so it needs its own selector.
+.article-title,
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3 {
+  letter-spacing: 0.04em;
+  text-wrap: balance;
+}
+.article-title,
+.markdown-rendered h1,
+.markdown-rendered h2 {
+  border-bottom: 1px solid var(--tertiary);
+  padding-bottom: 0.3rem;
+}
+.markdown-rendered {
+  h3,
+  h4,
+  h5,
+  h6 {
+    letter-spacing: 0.02em;
+  }
+  h4,
+  h5,
+  h6 {
+    color: var(--tertiary);
+  }
+}
+
+// --- Blood drop cap (kept plain, so it doesn't compete with the Mists) -------
+.markdown-rendered > p:first-of-type:not(:has(> img))::first-letter {
+  float: left;
+  font-family: var(--headerFont);
+  font-weight: 700;
+  font-size: 3.4em;
+  line-height: 0.72;
+  color: var(--secondary);
+  padding: 0.02em 0.1em 0 0;
+}
+
+// --- Callouts as omens ------------------------------------------------------
+// Light touch: keep Quartz's per-type colours (--color), add a heavier left
+// accent bar + header-font title + soft shadow.
+.callout {
+  border-left: 4px solid var(--color);
+  box-shadow: 0 1px 6px color-mix(in srgb, var(--dark) 12%, transparent);
+
+  & > .callout-title {
+    letter-spacing: 0.02em;
+    font-family: var(--headerFont);
+    font-size: 0.95rem;
+  }
+}
+
+// --- Links ------------------------------------------------------------------
+.markdown-rendered a:not(.internal):not(.tag-link) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  text-decoration-color: color-mix(in srgb, var(--secondary) 55%, transparent);
+
+  &:hover {
+    text-decoration-color: var(--tertiary);
+  }
+}
+
+// --- Blockquotes (manuscript margin-notes) ----------------------------------
+.markdown-rendered blockquote {
+  font-style: italic;
+  color: color-mix(in srgb, var(--darkgray) 88%, var(--gray));
+}
+
+// --- Themed scrollbar -------------------------------------------------------
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--lightgray);
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--lightgray);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--secondary), var(--tertiary));
+  border-radius: 6px;
+  border: 2px solid var(--light);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--tertiary);
+}
