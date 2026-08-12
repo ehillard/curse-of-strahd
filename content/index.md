@@ -1,8 +1,7 @@
 ---
 id: index
 aliases: []
-tags:
-  - created:2026-07-28T23:29:49
+tags: []
 title: The Curse of Strahd
 ---
 
@@ -10,3 +9,5 @@ title: The Curse of Strahd
 > I hope you are ready for your descent into fear
 
 Welcome, traveler, to a campaign vault bound in mist and dread.
+
+You can check out the rules for character creation at [[Character_Creation]] and combat rules at [[Combat]]. Expect these to be updated as we all decide on things.
