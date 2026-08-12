@@ -2,8 +2,7 @@
 id: Combat
 aliases:
   - Combat
-tags:
-  - created:2026-07-29T00:39:48
+tags: []
 ---
 
 > Expect this page to get updated as we discuss further rules
