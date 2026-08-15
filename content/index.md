@@ -11,3 +11,9 @@ title: The Curse of Strahd
 Welcome, traveler, to a campaign vault bound in mist and dread.
 
 You can check out the rules for character creation at [[Character_Creation]] and combat rules at [[Combat]]. Expect these to be updated as we all decide on things.
+
+## Contributing
+
+You can contribute at https://github.com/ehillard/curse-of-strahd. Just open a PR as per usual.
+
+If you just want to give me a blurb just let me know.
