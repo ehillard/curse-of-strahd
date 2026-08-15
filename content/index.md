@@ -16,4 +16,6 @@ You can check out the rules for character creation at [[Character_Creation]] and
 
 You can contribute at https://github.com/ehillard/curse-of-strahd. Just open a PR as per usual.
 
+You can read the `README.md` for more information
+
 If you just want to give me a blurb just let me know.
