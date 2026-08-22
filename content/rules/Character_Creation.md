@@ -29,11 +29,26 @@ I would like 1 element in each of your backstories about something that you want
 
 You will start at level 1 and end at level 10.
 
+### 10th Level
+
+Because we are ending at 10th level, I would like it to be impactful for everyone. In the case where you do not get a cool feature at level 10, I will probably either give you your 11th level feature at 10 or a scaled down version of it. This will be on a case by case basis.
+
 ## Homebrew
 
 Certain classes might get a boost at some levels (ranger), but I will discuss that if people want to play that class.
 
 If you have homebrew that you want to use, please run it by me first.
+
+### Approved Homebrew from DNDBeyond
+
+You can add homebrew by using the links provided. Like I said just ask me before adding stuff off this list:
+
+- Custom Character Background
+  - Use this if you need to separate your character background from your stats and/or feats
+  - With this, do not take a mark feat
+  - There are also feats from the heroes of faerun. A lot of these are very cool and might come up at level 4 if you want to take their corresponding 4th level feat. You can read about them here: https://www.dndbeyond.com/sources/dnd/frhof/character-options#OriginFeats
+  - If you use this just add 50 GP to your backpack for your background starting gold
+  - https://www.dndbeyond.com/backgrounds/511646-2024-custom-all-official-and-most-partnered-origin
 
 ## Source Books and Character Options
 
