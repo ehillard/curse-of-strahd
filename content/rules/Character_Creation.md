@@ -1,7 +1,6 @@
 ---
 id: Character_Creation
-aliases:
-  - Character_Creation
+aliases: []
 tags: []
 ---
 
