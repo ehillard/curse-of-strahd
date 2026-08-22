@@ -1,7 +1,6 @@
 ---
 id: Combat
-aliases:
-  - Combat
+aliases: []
 tags: []
 ---
 
